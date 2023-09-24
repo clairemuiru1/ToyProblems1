@@ -1,4 +1,17 @@
-const netSalary = basicSalary + benefits;
+let basicSalary = Number
+let benefits = Number
+let contributionBenefit = Number
+const personalRelief = 2400
+let insuraceRelief = Number
+const taxablePay = (grossSalary - (contributionBenefit + personalRelief + insuraceRelief))
+
+const grossSalary = basicSalary + benefits;
+const netSalary = grossSalary - (payee + NHIF + NSSF_I + NSSF_II);
+
+function limiter(insuraceRelief) {
+    if (insuraceRelief.value < 0) insuraceRelief.value = 0;
+    if (insuraceRelief.value > 5000) insuraceRelief.value = 5000;
+}
 function payee () {
     switch (taxablePay) {
         case taxablePay <= 24000:
@@ -70,5 +83,19 @@ function NHIF() {
         default:
             return 1700 // 1700 is deducted for grossSalary above 100000
             break;
+    }
+}
+function NSSF_I() {
+    function limiter(NSSF_I) {
+        if (NSSF_I.value < 0) NSSF_I.value = 0;
+        if (NSSF_I.value > 5000) NSSF_I.value = 6000;
+        return (grossSalary * 0.06) // 6% of pensionable pay to NSSF
+    }
+}
+function NSSF_II() {
+    function limiter(NSSF_II) {
+        if (NSSF_II.value < 0) NSSF_II.value = 6001;
+        if (NSSF_II.value > 5000) NSSF_II.value = 18000;
+        return (grossSalary * 0.06) // 6% of pensionable pay to NSSF
     }
 }
